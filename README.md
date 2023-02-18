@@ -14,7 +14,7 @@ Add it as a maven dependency or just [download the latest release](https://githu
 ```
 
 ## How To Use
-Defining and using the DSL is split up into 3 sections, each part is available as a full file over at [the test section of the repo](https://github.com/Konloch/DSLBuilder/). This includes a guide to help explain how you can write your own DSL using DSLBuilder.
+Defining and using the DSL is split up into 3 sections, each part is available as a full file over at [the test section of the repo](https://github.com/Konloch/DSLBuilder/tree/main/src/test/java/com/konloch). This includes a guide to help explain how you can write your own DSL using DSLBuilder.
 
 ## Disclaimer
 This offers **very** limited delimiter customization and **does not** have support for escaping reserved characters in strings.
