@@ -25,11 +25,11 @@ import java.util.List;
 public class DSL
 {
 	private final String setValueDelimiter;
+	private final char variableDelimiter;
 	private final String bracketDelimiterStart;
 	private final String bracketDelimiterEnd;
 	private final String subscriptDelimiterStart;
 	private final String subscriptDelimiterEnd;
-	private final char variableDelimiter;
 	private final String commentDelimiter;
 	private final HashMap<String, DSLDefinedCommand> commands = new HashMap<>();
 	private final HashMap<String, List<DSLRuntimeCommand>> subscripts = new HashMap<>();
@@ -39,23 +39,24 @@ public class DSL
 	 * Constructs a new DSL instance.
 	 *
 	 * @param setValueDelimiter any character to represent the variable value delimiter
+	 * @param variableDelimiter any character to represent the variable delimiter
 	 * @param bracketDelimiterStart any character to represent the bracket delimiter start
 	 * @param bracketDelimiterEnd any character to represent the bracket delimiter end
 	 * @param subscriptDelimiterStart any character to represent the subscript delimiter start
 	 * @param subscriptDelimiterEnd any character to represent the subscript delimiter end
-	 * @param variableDelimiter any character to represent the variable delimiter
 	 * @param commentDelimiter any character to represent the comment delimiter
 	 */
-	public DSL(char setValueDelimiter, char bracketDelimiterStart, char bracketDelimiterEnd,
-	           char subscriptDelimiterStart, char subscriptDelimiterEnd, char variableDelimiter,
+	public DSL(char setValueDelimiter, char variableDelimiter,
+	           char bracketDelimiterStart, char bracketDelimiterEnd,
+	           char subscriptDelimiterStart, char subscriptDelimiterEnd,
 	           char commentDelimiter)
 	{
 		this.setValueDelimiter = String.valueOf(setValueDelimiter);
+		this.variableDelimiter = variableDelimiter;
 		this.bracketDelimiterStart = String.valueOf(bracketDelimiterStart);
 		this.bracketDelimiterEnd = String.valueOf(bracketDelimiterEnd);
 		this.subscriptDelimiterStart = String.valueOf(subscriptDelimiterStart);
 		this.subscriptDelimiterEnd = String.valueOf(subscriptDelimiterEnd);
-		this.variableDelimiter = variableDelimiter;
 		this.commentDelimiter = String.valueOf(commentDelimiter);
 	}
 	
