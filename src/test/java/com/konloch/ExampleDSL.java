@@ -13,7 +13,8 @@ public class ExampleDSL extends DSL
 	public ExampleDSL()
 	{
 		super('=', '(', ')',
-				'{', '}', '%', '#');
+				'{', '}', '%',
+				'#');
 
 		//add the sub scripts
 		addSub("exampleA");
