@@ -1,6 +1,7 @@
 package com.konloch.dsl.runtime;
 
 import com.konloch.dsl.commands.DSLCommandType;
+import com.konloch.stringvars.StringVars;
 
 /**
  * A DSLCommand represents a variable or a function.
@@ -36,4 +37,9 @@ public class DSLRuntimeCommand
 		return parameters;
 	}
 	
+	public String getVariableValue(DSLRuntime runtime)
+	{
+		return StringVars.getVariableValue('%', ()->getParameters()[0],
+				(key)->runtime.getCommands().get(key).getVariableValue(runtime));
+	}
 }

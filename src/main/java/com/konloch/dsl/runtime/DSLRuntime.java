@@ -6,6 +6,7 @@ import com.konloch.dsl.commands.DSLDefinedCommand;
 import com.konloch.util.FastStringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Konloch
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 public class DSLRuntime
 {
 	private final DSL dsl;
+	private final HashMap<String, DSLRuntimeCommand> commands = new HashMap<>();
 	private String insideSubscript;
 	
 	public DSLRuntime(DSL dsl)
@@ -47,6 +49,9 @@ public class DSLRuntime
 				//turn the line into a runtime command
 				DSLRuntimeCommand command = buildRuntimeCommand(line);
 				
+				//store the parsed DSL command to be processed if needed
+				commands.put(command.getName(), command);
+				
 				//execute the runtime command
 				execute(command);
 			}
@@ -63,6 +68,9 @@ public class DSLRuntime
 			{
 				//turn the line into a runtime command
 				DSLRuntimeCommand command = buildRuntimeCommand(line);
+				
+				//store the parsed DSL command to be processed if needed
+				commands.put(command.getName(), command);
 				
 				//execute the runtime command
 				execute(command);
@@ -109,7 +117,7 @@ public class DSLRuntime
 		switch(command.getCommandType())
 		{
 			case VARIABLE:
-				command.getVariableRunnable().run(runtimeCommand.getParameters()[0]);
+				command.getVariableRunnable().run(runtimeCommand.getVariableValue(this));
 				break;
 				
 			case FUNCTION:
@@ -174,5 +182,15 @@ public class DSLRuntime
 		}
 		
 		return null;
+	}
+	
+	public HashMap<String, DSLRuntimeCommand> getCommands()
+	{
+		return commands;
+	}
+	
+	public DSL getDsl()
+	{
+		return dsl;
 	}
 }

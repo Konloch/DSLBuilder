@@ -45,18 +45,22 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
     <dependencies>
-        <dependency>
-            <groupId>com.konloch</groupId>
-            <artifactId>DiskLib</artifactId>
-            <version>1.0.1</version>
-        </dependency>
 	    <dependency>
 		    <groupId>com.konloch</groupId>
 		    <artifactId>FastStringUtils</artifactId>
 		    <version>1.0.0</version>
 		    <scope>compile</scope>
+	    </dependency>
+	    <dependency>
+		    <groupId>com.konloch</groupId>
+		    <artifactId>StringVars</artifactId>
+		    <version>1.0.0</version>
+	    </dependency>
+	    <dependency>
+		    <groupId>com.konloch</groupId>
+		    <artifactId>DiskLib</artifactId>
+		    <version>1.0.1</version>
 	    </dependency>
     </dependencies>
 
