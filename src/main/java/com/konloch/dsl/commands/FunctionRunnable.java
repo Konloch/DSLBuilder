@@ -6,5 +6,10 @@ package com.konloch.dsl.commands;
  */
 public interface FunctionRunnable
 {
+	/**
+	 * A functional interface for functions
+	 *
+	 * @param parameters the parameters supplied for the function
+	 */
 	void run(String[] parameters);
 }

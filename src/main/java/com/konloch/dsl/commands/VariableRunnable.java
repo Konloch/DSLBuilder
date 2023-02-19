@@ -6,5 +6,10 @@ package com.konloch.dsl.commands;
  */
 public interface VariableRunnable
 {
+	/**
+	 * A functional interface for variables
+	 *
+	 * @param value the value supplied for the variable
+	 */
 	void run(String value);
 }

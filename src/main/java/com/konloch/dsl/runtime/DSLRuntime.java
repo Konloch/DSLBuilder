@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
+ * The DSLRuntime parses and executes Strings based on the supplied DSL.
+ *
  * @author Konloch
  * @since Jan, 17th, 2017
  */
@@ -18,16 +20,29 @@ public class DSLRuntime
 	private final HashMap<String, DSLRuntimeCommand> commands = new HashMap<>();
 	private String insideSubscript;
 	
+	/**
+	 * Construct a new instance of the DSLRuntime
+	 *
+	 * @param dsl any DSL
+	 */
 	public DSLRuntime(DSL dsl)
 	{
 		this.dsl = dsl;
 	}
 	
+	/**
+	 * Signal to the runtime that the parsing has stopped externally.
+	 */
 	public void stopParse()
 	{
 		insideSubscript = null;
 	}
 	
+	/**
+	 * Attempts to parse any String and runs it if it's part of the init, or else it will store the DLSRuntimeCommand under the read subscript
+	 *
+	 * @param line any String
+	 */
 	public void parseLine(String line)
 	{
 		if (line == null)
@@ -55,7 +70,7 @@ public class DSLRuntime
 				//execute the runtime command
 				execute(command);
 			}
-			else if (line.endsWith(dsl.getSubScriptDelimiterStart()))
+			else if (line.endsWith(dsl.getSubscriptDelimiterStart()))
 			{
 				String functionName = line.substring(0, line.length()-1).trim();
 				
@@ -78,7 +93,7 @@ public class DSLRuntime
 		}
 		else
 		{
-			if (line.contains(dsl.getSubScriptDelimiterEnd()))
+			if (line.contains(dsl.getSubscriptDelimiterEnd()))
 			{
 				insideSubscript = null;
 			}
@@ -103,6 +118,11 @@ public class DSLRuntime
 		}
 	}
 	
+	/**
+	 * Executes a specific DLSRuntimeCommand
+	 *
+	 * @param runtimeCommand any DLSRuntimeCommand
+	 */
 	public void execute(DSLRuntimeCommand runtimeCommand)
 	{
 		DSLDefinedCommand command = dsl.getCommands().get(runtimeCommand.getName());
@@ -114,7 +134,7 @@ public class DSLRuntime
 			return;
 		}
 		
-		switch(command.getCommandType())
+		switch(command.getType())
 		{
 			case VARIABLE:
 				command.getVariableRunnable().run(runtimeCommand.getVariableValue(this));
@@ -126,6 +146,12 @@ public class DSLRuntime
 		}
 	}
 	
+	/**
+	 * Attempts to build a DSLRuntimeCommand from any String.
+	 *
+	 * @param line any String
+	 * @return the DSLRuntimeCommand if it can be created, if not it will return null
+	 */
 	public DSLRuntimeCommand buildRuntimeCommand(String line)
 	{
 		//look for the function bracket delimiters
@@ -184,12 +210,22 @@ public class DSLRuntime
 		return null;
 	}
 	
+	/**
+	 * Returns all the DLSRuntimeCommands created during runtime.
+	 *
+	 * @return the commands in the form of a HashMap
+	 */
 	public HashMap<String, DSLRuntimeCommand> getCommands()
 	{
 		return commands;
 	}
 	
-	public DSL getDsl()
+	/**
+	 * Returns the DSL linked with this DSLRuntime instance.
+	 *
+	 * @return the DSL instance
+	 */
+	public DSL getDSL()
 	{
 		return dsl;
 	}

@@ -19,8 +19,8 @@ public class ExampleDSLDriver
 			dsl.parse(new File("./src/test/java/com/konloch/ExampleDSLConfig"));
 			
 			//execute the subscripts
-			dsl.executeSubscript("exampleA");
-			dsl.executeSubscript("exampleB");
+			dsl.run("exampleA");
+			dsl.run("exampleB");
 		}
 		catch (IOException e)
 		{
