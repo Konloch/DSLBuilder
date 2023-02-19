@@ -60,7 +60,7 @@ public class DSL
 	}
 	
 	/**
-	 * Clear all the user defined commands & subscripts. It also removes all runtime data.
+	 * Clear all the user defined commands and subscripts. It also removes all runtime data.
 	 *
 	 * @return this instance for method chaining
 	 */
