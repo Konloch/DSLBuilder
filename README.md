@@ -13,6 +13,11 @@ Add it as a maven dependency or just [download the latest release](https://githu
 </dependency>
 ```
 
+## Links
+* [Website](https://konloch.com/DSLBuilder/)
+* [Discord Server](https://discord.gg/aexsYpfMEf)
+* [Download Releases](https://github.com/Konloch/DSLBuilder/releases)
+
 ## How To Use
 [Click here to view an example DSL implementation using DSLBuilder](https://github.com/Konloch/DSLBuilder/tree/main/src/test/java/com/konloch)
 
