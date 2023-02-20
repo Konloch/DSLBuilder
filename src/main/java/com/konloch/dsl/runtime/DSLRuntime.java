@@ -7,6 +7,7 @@ import com.konloch.util.FastStringUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * The DSLRuntime parses and executes Strings based on the supplied DSL.
@@ -17,7 +18,7 @@ import java.util.HashMap;
 public class DSLRuntime
 {
 	private final DSL dsl;
-	private final HashMap<String, DSLRuntimeCommand> commands = new HashMap<>();
+	private final LinkedHashMap<String, DSLRuntimeCommand> commands = new LinkedHashMap<>();
 	private String insideSubscript;
 	
 	/**
