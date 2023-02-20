@@ -197,13 +197,13 @@ public class DSLRuntime
 		if (line.contains(dsl.getSetValueDelimiter()))
 		{
 			String[] split = FastStringUtils.split(line, dsl.getSetValueDelimiter(), 2);
-			String name = split[0];
-			String value = split[1];
+			String name = split[0].trim();
+			String value = split[1].trim();
 			
 			//verify the data is valid, then make sure the runtime command has a handler
 			//if it does, assume this is a variable
 			//TODO if strict true, it should re-enable the runtime command handler check
-			if (!(name == null || name.isEmpty() || value == null || value.isEmpty()))
+			if (!name.isEmpty() && !value.isEmpty())
 				//&& dsl.getCommands().containsKey(name))
 				return new DSLRuntimeCommand(DSLCommandType.VARIABLE, name, new String[]{value});
 		}
