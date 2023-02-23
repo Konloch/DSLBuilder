@@ -9,7 +9,7 @@ Add it as a maven dependency or just [download the latest release](https://githu
 <dependency>
   <groupId>com.konloch</groupId>
   <artifactId>DSLBuilder</artifactId>
-  <version>1.1.1</version>
+  <version>1.1.2</version>
 </dependency>
 ```
 
