@@ -155,6 +155,21 @@ public class DSLRuntime
 	 */
 	public DSLRuntimeCommand buildRuntimeCommand(String line)
 	{
+		//does an unrestricted quick then first, then a deeper verification before it creates the variable
+		if (line.contains(dsl.getSetValueDelimiter()))
+		{
+			String[] split = FastStringUtils.split(line, dsl.getSetValueDelimiter(), 2);
+			String name = split[0].trim();
+			String value = split[1].trim();
+			
+			//verify the data is valid, then make sure the runtime command has a handler
+			//if it does, assume this is a variable
+			//TODO if strict true, it should re-enable the runtime command handler check
+			if (!name.isEmpty() && !value.isEmpty())
+				//&& dsl.getCommands().containsKey(name))
+				return new DSLRuntimeCommand(DSLCommandType.VARIABLE, name, new String[]{value});
+		}
+		
 		//look for the function bracket delimiters
 		if (line.contains(dsl.getBracketDelimiterStart()) && line.contains(dsl.getBracketDelimiterEnd()))
 		{
@@ -191,21 +206,6 @@ public class DSLRuntime
 			{
 				return new DSLRuntimeCommand(DSLCommandType.VARIABLE, name, null);
 			}
-		}
-		
-		//does an unrestricted quick then first, then a deeper verification before it creates the variable
-		if (line.contains(dsl.getSetValueDelimiter()))
-		{
-			String[] split = FastStringUtils.split(line, dsl.getSetValueDelimiter(), 2);
-			String name = split[0].trim();
-			String value = split[1].trim();
-			
-			//verify the data is valid, then make sure the runtime command has a handler
-			//if it does, assume this is a variable
-			//TODO if strict true, it should re-enable the runtime command handler check
-			if (!name.isEmpty() && !value.isEmpty())
-				//&& dsl.getCommands().containsKey(name))
-				return new DSLRuntimeCommand(DSLCommandType.VARIABLE, name, new String[]{value});
 		}
 		
 		return null;

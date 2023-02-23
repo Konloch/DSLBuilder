@@ -3,7 +3,7 @@
 
     <groupId>com.konloch</groupId>
     <artifactId>DSLBuilder</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.2</version>
 
     <name>DSLBuilder</name>
     <description>DSLBuilder is zero dependency Java library for creating domain specific languages.</description>
