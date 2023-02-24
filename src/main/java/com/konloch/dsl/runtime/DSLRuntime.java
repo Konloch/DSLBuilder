@@ -65,6 +65,10 @@ public class DSLRuntime
 				//turn the line into a runtime command
 				DSLRuntimeCommand command = buildRuntimeCommand(line);
 				
+				//TODO should alert unknown command was reached here
+				if(command == null)
+					return;
+				
 				//store the parsed DSL command to be processed if needed
 				commands.put(command.getName(), command);
 				
@@ -75,7 +79,7 @@ public class DSLRuntime
 			{
 				String functionName = line.substring(0, line.length()-1).trim();
 				
-				if (dsl.getSubscripts().containsKey(functionName))
+				if (!functionName.isEmpty() && (!dsl.isStrictMode() || dsl.isStrictMode() && dsl.getSubscripts().containsKey(functionName)))
 				{
 					insideSubscript = functionName;
 				}
@@ -84,6 +88,10 @@ public class DSLRuntime
 			{
 				//turn the line into a runtime command
 				DSLRuntimeCommand command = buildRuntimeCommand(line);
+				
+				//TODO should alert unknown command was reached here
+				if(command == null)
+					return;
 				
 				//store the parsed DSL command to be processed if needed
 				commands.put(command.getName(), command);
@@ -165,8 +173,7 @@ public class DSLRuntime
 			//verify the data is valid, then make sure the runtime command has a handler
 			//if it does, assume this is a variable
 			//TODO if strict true, it should re-enable the runtime command handler check
-			if (!name.isEmpty() && !value.isEmpty())
-				//&& dsl.getCommands().containsKey(name))
+			if (!name.isEmpty() && !value.isEmpty() && (!dsl.isStrictMode() || dsl.isStrictMode() && dsl.getCommands().containsKey(name)))
 				return new DSLRuntimeCommand(DSLCommandType.VARIABLE, name, new String[]{value});
 		}
 		

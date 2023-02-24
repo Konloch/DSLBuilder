@@ -31,12 +31,14 @@ public class DSL
 	private final String subscriptDelimiterStart;
 	private final String subscriptDelimiterEnd;
 	private final String commentDelimiter;
+	private final boolean strictMode;
 	private final HashMap<String, DSLDefinedCommand> commands = new HashMap<>();
 	private final HashMap<String, List<DSLRuntimeCommand>> subscripts = new HashMap<>();
 	private final DSLRuntime runtime = new DSLRuntime(this);
 	
+	
 	/**
-	 * Constructs a new DSL instance.
+	 * Constructs a new DSL instance with strict mode disabled by default.
 	 *
 	 * @param setValueDelimiter any character to represent the variable value delimiter
 	 * @param variableDelimiter any character to represent the variable delimiter
@@ -51,6 +53,29 @@ public class DSL
 	           char subscriptDelimiterStart, char subscriptDelimiterEnd,
 	           char commentDelimiter)
 	{
+		this(setValueDelimiter, variableDelimiter,
+				bracketDelimiterStart, bracketDelimiterEnd,
+				subscriptDelimiterStart, subscriptDelimiterEnd,
+				commentDelimiter, false);
+	}
+	
+	/**
+	 * Constructs a new DSL instance.
+	 *
+	 * @param setValueDelimiter any character to represent the variable value delimiter
+	 * @param variableDelimiter any character to represent the variable delimiter
+	 * @param bracketDelimiterStart any character to represent the bracket delimiter start
+	 * @param bracketDelimiterEnd any character to represent the bracket delimiter end
+	 * @param subscriptDelimiterStart any character to represent the subscript delimiter start
+	 * @param subscriptDelimiterEnd any character to represent the subscript delimiter end
+	 * @param commentDelimiter any character to represent the comment delimiter
+	 * @param strictMode true for strict mode to be enabled
+	 */
+	public DSL(char setValueDelimiter, char variableDelimiter,
+	           char bracketDelimiterStart, char bracketDelimiterEnd,
+	           char subscriptDelimiterStart, char subscriptDelimiterEnd,
+	           char commentDelimiter, boolean strictMode)
+	{
 		this.setValueDelimiter = String.valueOf(setValueDelimiter);
 		this.variableDelimiter = variableDelimiter;
 		this.bracketDelimiterStart = String.valueOf(bracketDelimiterStart);
@@ -58,6 +83,7 @@ public class DSL
 		this.subscriptDelimiterStart = String.valueOf(subscriptDelimiterStart);
 		this.subscriptDelimiterEnd = String.valueOf(subscriptDelimiterEnd);
 		this.commentDelimiter = String.valueOf(commentDelimiter);
+		this.strictMode = strictMode;
 	}
 	
 	/**
@@ -274,6 +300,16 @@ public class DSL
 	public String getCommentDelimiter()
 	{
 		return commentDelimiter;
+	}
+	
+	/**
+	 * Returns the strict mode flag
+	 *
+	 * @return if true strict mode will be enabled during runtime parsing
+	 */
+	public boolean isStrictMode()
+	{
+		return strictMode;
 	}
 	
 	/**

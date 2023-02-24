@@ -8,16 +8,21 @@ import com.konloch.dsl.DSL;
  * @author Konloch
  * @since Jan, 17th, 2017
  */
-public class ExampleDSL extends DSL
+public class ExampleDSLStrictMode extends DSL
 {
-	public ExampleDSL()
+	public ExampleDSLStrictMode()
 	{
 		super('=', '%',
 				'(', ')',
 				'{', '}',
-				'#');
+				'#', true);
+
+		//add the sub scripts
+		addSub("exampleA");
+		addSub("exampleB");
 		
 		//variables - variable=value
+		addVar("variableExample", value -> {});
 		addVar("variable", value ->
 		{
 			System.out.println("Variable Set: " + value);
