@@ -60,7 +60,7 @@
 	    <dependency>
 		    <groupId>com.konloch</groupId>
 		    <artifactId>DiskLib</artifactId>
-		    <version>1.0.1</version>
+		    <version>1.2.0</version>
 	    </dependency>
     </dependencies>
 
